@@ -8,3 +8,5 @@
 > [3] The algorithm uses target chromosome to measure the fitness score of each chromosome, where the fitness score is proportional to the degree of similarity between target and the corresponding chromosome.
 
 Feel free to play with the target and parameters used in the intermediate steps ( selection, crossover, mutation ) to observe diversity within the simulation.
+
+![alt text](grow.png)
