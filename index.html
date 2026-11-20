@@ -1,13 +1,56 @@
-<!DOCTYPE html><html lang="en"><head>
-    <script src="p5.js"></script>
-    <script src="p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Genetic Algorithm Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+  <h1>Genetic Algorithm Visualizer</h1>
+  <p class="sub">A population of random pixel “species” evolves by selection, crossover and mutation until one perfectly matches the model.</p>
 
-  </head>
-  <body>
-    <script src="GA.js"></script>
-    <script src="sketch.js"></script>
-  
+  <div class="controls">
+    <button id="toggle" class="primary">Stop</button>
+    <button id="reset">Reset</button>
+    <select id="size" aria-label="Model size">
+      <option value="16">Size: 16×16</option>
+      <option value="24" selected>Size: 24×24</option>
+      <option value="32">Size: 32×32</option>
+      <option value="48">Size: 48×48</option>
+    </select>
+    <select id="model" aria-label="Model">
+      <optgroup label="Pixel art">
+        <option value="heart">Heart</option><option value="smiley">Smiley</option><option value="tree">Tree</option><option value="invader">Invader</option>
+        <option value="sunset">Sunset landscape</option><option value="planet">Ringed planet</option><option value="mushroom">Mushroom</option><option value="flower">Flower</option><option value="rainbow">Rainbow sky</option>
+      </optgroup>
+      <optgroup label="Text"><option value="text">Text (phrases)</option></optgroup>
+      <optgroup label="3D voxel models">
+        <option value="3d:sphere">3D Sphere</option><option value="3d:pyramid">3D Pyramid</option><option value="3d:torus">3D Torus</option><option value="3d:tree">3D Tree</option>
+        <option value="3d:castle">3D Castle</option><option value="3d:mushroom">3D Mushroom</option><option value="3d:helix">3D DNA helix</option>
+      </optgroup>
+    </select>
+    <span id="textOpts" hidden><select id="lang" aria-label="Language"></select> <select id="phrase" aria-label="Phrase"></select></span>
+    <label class="speed">Speed <input id="speed" type="range" min="1" max="100" value="40"><span id="gps" style="min-width:90px;text-align:right;font-variant-numeric:tabular-nums"></span></label>
+  </div>
 
-</body></html>
+  <p id="help3d" class="sub" hidden>3D mode: <b>W A S D</b> move, <b>Space</b>/<b>Shift</b> up/down, <b>drag the mouse</b> on a view to look around (double-click for mouse-look lock). Size 16/24/32/48 maps to 8³/12³/16³/20³ voxels.</p>
+  <div class="figs">
+    <div class="card fig"><h2>Model (target)</h2><canvas id="target" width="24" height="24"></canvas><div class="txt" id="tTxt" hidden></div></div>
+    <div class="card fig"><h2>Best species</h2><canvas id="best" width="24" height="24"></canvas><div class="txt" id="bTxt" hidden></div></div>
+  </div>
+
+  <div class="stats">
+    <div class="card stat"><span>Generation</span><b id="sGen">0</b></div>
+    <div class="card stat"><span>Best fitness</span><b id="sBest">0</b></div>
+    <div class="card stat" id="matchCard"><span>Match</span><b id="sPct">0%</b></div>
+    <div class="card stat"><span>Mean fitness</span><b id="sMean">0</b></div>
+  </div>
+
+  <div class="card"><canvas id="chart" width="900" height="240"></canvas></div>
+</main>
+
+    <script src="app.js" defer></script>
+</body>
+</html>
